@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
  * @author DI_SH
  */
 public class AddCustomerForm extends javax.swing.JDialog {
+    private  String nextId;
 
     /**
      *
@@ -34,7 +35,7 @@ public class AddCustomerForm extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         try {
-            String nextId = ServerConnector.getServerConnector().getCustomerController().getNextCustomerId();
+            nextId = ServerConnector.getServerConnector().getCustomerController().getNextCustomerId();
             customerIdTextField.setText(nextId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,6 +70,11 @@ public class AddCustomerForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         mainPanel.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -176,12 +182,12 @@ public class AddCustomerForm extends javax.swing.JDialog {
                     .addComponent(customerLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(customerIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(nameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
                         .addComponent(addressTextField)
-                        .addComponent(contactTextField)))
-                .addGap(0, 24, Short.MAX_VALUE))
+                        .addComponent(contactTextField))
+                    .addComponent(customerIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +249,9 @@ public class AddCustomerForm extends javax.swing.JDialog {
             boolean res = ServerConnector.getServerConnector().getCustomerController().saveCustomer(customer);
             if (res) {
                 JOptionPane.showMessageDialog(this, "Saved...");
+                nextId = null;
             }
+            ServerConnector.getServerConnector().getCustomerController().releaseCustomerId(nextId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -284,6 +292,16 @@ public class AddCustomerForm extends javax.swing.JDialog {
     private void contactTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactTextFieldKeyReleased
         setSaveButtonEnable();
     }//GEN-LAST:event_contactTextFieldKeyReleased
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            if (nextId != null) {
+                ServerConnector.getServerConnector().getCustomerController().releaseCustomerId(nextId);
+            }
+        } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
