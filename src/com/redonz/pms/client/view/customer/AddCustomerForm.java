@@ -34,8 +34,8 @@ public class AddCustomerForm extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         try {
-            String lastID = ServerConnector.getServerConnector().getCustomerController().getLastCustomerID();
-            customerIdTextField.setText(IDGen.getNextId(lastID));
+            String nextId = ServerConnector.getServerConnector().getCustomerController().getNextCustomerId();
+            customerIdTextField.setText(nextId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
