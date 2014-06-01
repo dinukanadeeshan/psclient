@@ -7,6 +7,7 @@ package com.redonz.pms.client.view.item;
 //<editor-fold defaultstate="collapsed" desc="Import Statemnts">
 import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.observer.BatchItemObserver;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.model.BatchItem;
 import com.redonz.pms.common.model.Category;
 import com.redonz.pms.common.model.Item;
@@ -15,6 +16,8 @@ import com.redonz.pms.common.model.ObserverTO;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
@@ -66,6 +69,10 @@ public class SearchItemForm extends javax.swing.JDialog {
             if (ex.getMessage().contains("Connection refused to host")) {
                 JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         toExpDatePicker.setFormats(dateFormat);
@@ -527,6 +534,10 @@ public class SearchItemForm extends javax.swing.JDialog {
                 fillItemTable(items);
             } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             itemTable.requestFocus();
@@ -578,8 +589,16 @@ public class SearchItemForm extends javax.swing.JDialog {
                     }
                 } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex1) {
                     Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex1);
+                } catch (FileNotFoundException ex1) {
+                    Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex1);
+                } catch (IOException ex1) {
+                    Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex1);
                 }
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_batchNoTextFieldKeyReleased
 
@@ -611,6 +630,10 @@ public class SearchItemForm extends javax.swing.JDialog {
             }
         } catch (NotBoundException | MalformedURLException | SQLException | ClassNotFoundException | RemoteException ex) {
             Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_searchButtonActionPerformed
@@ -716,6 +739,10 @@ public class SearchItemForm extends javax.swing.JDialog {
             fillItemTable(itemsByDescription);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_itemNameTextFieldKeyReleased
 
@@ -728,7 +755,11 @@ public class SearchItemForm extends javax.swing.JDialog {
 
             } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_categoryComboBoxItemStateChanged
 
@@ -779,7 +810,6 @@ public class SearchItemForm extends javax.swing.JDialog {
             }
         });
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox availableCheckBox;
     private javax.swing.JLabel barcodeLabel;
@@ -826,7 +856,7 @@ public class SearchItemForm extends javax.swing.JDialog {
 
     }
 
-    private void fillItemTable(ArrayList<Item> items) throws RemoteException, NotBoundException, MalformedURLException, SQLException, ClassNotFoundException {
+    private void fillItemTable(ArrayList<Item> items) throws RemoteException, NotBoundException, MalformedURLException, SQLException, ClassNotFoundException , FileNotFoundException, IOException{
         itemDTM.setRowCount(0);
         batchDTM.setRowCount(0);
         for (Item item : items) {
@@ -841,7 +871,7 @@ public class SearchItemForm extends javax.swing.JDialog {
         }
     }
 
-    private void fillCategoryComboBox() throws RemoteException, NotBoundException, MalformedURLException, SQLException, ClassNotFoundException {
+    private void fillCategoryComboBox() throws RemoteException, NotBoundException, MalformedURLException, SQLException, ClassNotFoundException , FileNotFoundException, IOException{
         itemLoaded = false;
 
         ArrayList<Category> allCategories = ServerConnector.getServerConnector().getCategoryController().getAllCategories();
@@ -894,7 +924,7 @@ public class SearchItemForm extends javax.swing.JDialog {
                             }
                         }
                         batchlTable.repaint();
-    //                } else if (observerTO.getAction().equals(ObserverTO.DELETE)) {
+                        //                } else if (observerTO.getAction().equals(ObserverTO.DELETE)) {
                         break;
                 }
             }
@@ -918,7 +948,7 @@ public class SearchItemForm extends javax.swing.JDialog {
                     margin = batchlTable.getRowCount() - 1;
                     batchDTM.addRow(new Object[]{batchItem.getBatchNo(), batchItem.getUnitPrice(), batchItem.getQty(), batchItem.getExpDate(), batchItem.getBarCode()});
                     break;
-                
+
             }
             integers.clear();
             margin = -2;
@@ -940,6 +970,10 @@ public class SearchItemForm extends javax.swing.JDialog {
             }
         } catch (SQLException | ClassNotFoundException | RemoteException | NotBoundException | MalformedURLException ex) {
             Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

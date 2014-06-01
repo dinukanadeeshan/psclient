@@ -9,6 +9,7 @@ import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.observer.PaymentObserver;
 import com.redonz.pms.client.others.IDGen;
 import com.redonz.pms.client.others.Validation;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.model.Customer;
 import com.redonz.pms.common.model.CustomerOrder;
 import com.redonz.pms.common.model.CustomerOrderDetail;
@@ -16,6 +17,8 @@ import com.redonz.pms.common.model.ObserverTO;
 import com.redonz.pms.common.model.Payment;
 import java.awt.Color;
 import java.awt.Component;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -69,6 +72,10 @@ public class SettlePaymentForm extends javax.swing.JDialog {
             if (ex.getMessage().contains("Connection refused to host")) {
                 JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             paymentObserver = new PaymentObserver(this);
@@ -645,6 +652,10 @@ public class SettlePaymentForm extends javax.swing.JDialog {
                     fillOrderDetailTable(orderDetails);
                 } catch (NotBoundException | MalformedURLException | RemoteException | ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(SettlePaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             } else {
@@ -730,6 +741,10 @@ public class SettlePaymentForm extends javax.swing.JDialog {
 
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerPaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -915,7 +930,7 @@ public class SettlePaymentForm extends javax.swing.JDialog {
         }
     }
 
-    private void fillOrderDetailTable(ArrayList<CustomerOrderDetail> orderDetails) throws NotBoundException, MalformedURLException, RemoteException, SQLException, ClassNotFoundException {
+    private void fillOrderDetailTable(ArrayList<CustomerOrderDetail> orderDetails) throws NotBoundException, MalformedURLException, RemoteException, SQLException, ClassNotFoundException, FileNotFoundException, IOException {
         orderDetailModel.setRowCount(0);
         for (CustomerOrderDetail customerOrderDetail : orderDetails) {
             String desc = ServerConnector.getServerConnector().getBatchItemController().getItemByItemCode(customerOrderDetail.getItemCode()).getDescription();
@@ -934,12 +949,16 @@ public class SettlePaymentForm extends javax.swing.JDialog {
             checkOrderTable();
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SettlePaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 //        paymentRecievedTextField.setEditable(orderTable.getRowCount() > 0);
         paymentHistoryButton.setEnabled(orderTable.getRowCount() > 0);
     }
 
-    private void loadCustomersToComboBox() throws NotBoundException, RemoteException, SQLException, MalformedURLException, ClassNotFoundException {
+    private void loadCustomersToComboBox() throws NotBoundException, RemoteException, SQLException, MalformedURLException, ClassNotFoundException, FileNotFoundException, IOException {
         loadCustomerComplete = false;
         ArrayList<Customer> allCustomers = ServerConnector.getServerConnector().getCustomerController().getAllCustomers();
         customerComboBox.removeAllItems();
@@ -1008,6 +1027,10 @@ public class SettlePaymentForm extends javax.swing.JDialog {
             fillOrderTable(ordersByCustId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SettlePaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         checkOrderTable();
     }
@@ -1021,6 +1044,10 @@ public class SettlePaymentForm extends javax.swing.JDialog {
             checkOrderTable();
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SettlePaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -6,12 +6,14 @@ package com.redonz.pms.client.view.order;
 
 import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.others.Validation;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.model.Customer;
 import com.redonz.pms.common.model.CustomerOrderDetail;
 import com.redonz.pms.common.model.HoldOrder;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -48,6 +50,10 @@ public class ViewHoldOrderForm extends javax.swing.JDialog {
             fillCustomerComboBox();
         } catch (NotBoundException | MalformedURLException | SQLException | ClassNotFoundException | RemoteException ex) {
             Logger.getLogger(ViewHoldOrderForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -349,7 +355,11 @@ public class ViewHoldOrderForm extends javax.swing.JDialog {
                 ServerConnector.getServerConnector().getHoldOrderController().removeHoldOrder(ho);
             } catch (SQLException | NotBoundException | ClassNotFoundException | MalformedURLException | RemoteException ex) {
                 Logger.getLogger(ViewHoldOrderForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
             dispose();
         }
     }//GEN-LAST:event_orderTableKeyPressed
@@ -437,7 +447,11 @@ public class ViewHoldOrderForm extends javax.swing.JDialog {
                 ServerConnector.getServerConnector().getHoldOrderController().removeHoldOrder(ho);
             } catch (SQLException | NotBoundException | ClassNotFoundException | MalformedURLException | RemoteException ex) {
                 Logger.getLogger(ViewHoldOrderForm.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
             dispose();
 
         }
@@ -507,7 +521,7 @@ public class ViewHoldOrderForm extends javax.swing.JDialog {
     private javax.swing.JButton viewAllButton;
     // End of variables declaration//GEN-END:variables
 
-    private void fillCustomerComboBox() throws NotBoundException, MalformedURLException, SQLException, ClassNotFoundException, RemoteException {
+    private void fillCustomerComboBox() throws NotBoundException, MalformedURLException, SQLException, ClassNotFoundException, RemoteException , FileNotFoundException, IOException{
         fillingCustomerCompleted = false;
         customerComboBox.removeAllItems();
         customerComboBox.addItem("<select Customer>");

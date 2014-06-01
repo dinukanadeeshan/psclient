@@ -7,10 +7,13 @@ package com.redonz.pms.client.view.item;
 import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.others.Validation;
 import com.redonz.pms.client.view.category.AddCategoryForm;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.model.Category;
 import com.redonz.pms.common.model.Item;
 import com.redonz.pms.common.model.ObserverTO;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -48,6 +51,10 @@ public class AddItemForm extends javax.swing.JDialog {
             if (ex.getMessage().contains("Connection refused to host")) {
                 JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -66,6 +73,10 @@ public class AddItemForm extends javax.swing.JDialog {
             if (ex.getMessage().contains("Connection refused to host")) {
                 JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -277,11 +288,15 @@ public class AddItemForm extends javax.swing.JDialog {
                     }
                     refresh();
                 }
-                
+
             } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "This item already added....");
         }
 
@@ -360,10 +375,14 @@ public class AddItemForm extends javax.swing.JDialog {
             }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void fillCategoryComboBox() throws NotBoundException, MalformedURLException, RemoteException, SQLException, ClassNotFoundException {
+    private void fillCategoryComboBox() throws NotBoundException, MalformedURLException, RemoteException, SQLException, ClassNotFoundException, FileNotFoundException, IOException {
         ArrayList<Category> allCategories = ServerConnector.getServerConnector().getCategoryController().getAllCategories();
         categoryComboBox.removeAllItems();
         for (Category category : allCategories) {
@@ -381,6 +400,10 @@ public class AddItemForm extends javax.swing.JDialog {
             fillCategoryComboBox();
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

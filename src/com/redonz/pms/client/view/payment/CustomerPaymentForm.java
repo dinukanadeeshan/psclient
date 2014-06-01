@@ -7,6 +7,7 @@ package com.redonz.pms.client.view.payment;
 import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.others.IDGen;
 import com.redonz.pms.client.others.Validation;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.client.view.order.MakeInvoiceForm;
 import com.redonz.pms.common.controller.HoldOrderController;
 import com.redonz.pms.common.model.CustomerOrder;
@@ -15,6 +16,8 @@ import com.redonz.pms.common.model.HoldOrder;
 import com.redonz.pms.common.model.Payment;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -409,6 +412,10 @@ public class CustomerPaymentForm extends javax.swing.JDialog {
             }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerPaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_confirmButtonActionPerformed
 

@@ -34,9 +34,12 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import com.redonz.pms.client.others.ComboSearchNew;
 import com.redonz.pms.client.others.IDGen;
 import com.redonz.pms.client.others.Validation;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.model.CustomerOrder;
 import com.redonz.pms.common.model.CustomerOrderDetail;
 import com.redonz.pms.common.model.HoldOrder;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 //</editor-fold>
 
 /**
@@ -76,6 +79,10 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
             if (ex.getMessage().contains("Connection refused to host")) {
                 JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         dtm = (DefaultTableModel) itemTable.getModel();
         itemTable.getColumnModel().getColumn(0).setPreferredWidth(0);
@@ -97,6 +104,10 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
 
                 } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(MakeInvoiceForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }.start();
@@ -108,6 +119,10 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
             fillCustomerComboBox();
         } catch (NotBoundException | MalformedURLException | SQLException | ClassNotFoundException | RemoteException ex) {
             Logger.getLogger(MakeInvoiceForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         barcodeTextField.requestFocus();
 //        try {
@@ -739,6 +754,10 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateStockForm.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_barcodeTextFieldActionPerformed
 
@@ -812,7 +831,7 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
             dtm.removeRow(selectedRow);
             try {
                 ServerConnector.getServerConnector().getBatchItemController().releaseBatchItem((String) itemTable.getValueAt(selectedRow, 0));
-            } catch (    NotBoundException | MalformedURLException | RemoteException ex) {
+            } catch (NotBoundException | MalformedURLException | RemoteException ex) {
                 Logger.getLogger(MakeInvoiceForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -906,6 +925,10 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
 //            }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MakeInvoiceForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -1139,7 +1162,7 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
         }
     }
 
-    public void setItemDetail(BatchItem item) throws RemoteException, NotBoundException, SQLException, MalformedURLException, ClassNotFoundException {
+    public void setItemDetail(BatchItem item) throws RemoteException, NotBoundException, SQLException, MalformedURLException, ClassNotFoundException, FileNotFoundException, IOException {
         Item searchItem = ServerConnector.getServerConnector().getItemController().searchItem(barcode);
         itemNameTextField.setText(searchItem.getDescription());
         batchNoTextField.setText(item.getBatchNo());
@@ -1155,7 +1178,7 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
 
     }
 
-    private void fillCustomerComboBox() throws NotBoundException, MalformedURLException, SQLException, ClassNotFoundException, RemoteException {
+    private void fillCustomerComboBox() throws NotBoundException, MalformedURLException, SQLException, ClassNotFoundException, RemoteException, FileNotFoundException, IOException {
         fillingCustomerCompleted = false;
         customerComboBox.removeAllItems();
         ArrayList<Customer> allCustomers = ServerConnector.getServerConnector().getCustomerController().getAllCustomers();
@@ -1166,7 +1189,7 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
 
     }
 
-    void setOrderDetail(HoldOrder ho) throws SQLException, NotBoundException, ClassNotFoundException, MalformedURLException, RemoteException {
+    void setOrderDetail(HoldOrder ho) throws SQLException, NotBoundException, ClassNotFoundException, MalformedURLException, RemoteException, FileNotFoundException, IOException {
         setCustomer(ho.getCustId());
         ArrayList<CustomerOrderDetail> customerOrderDetailList = ho.getCustomerOrderDetailList();
         for (CustomerOrderDetail customerOrderDetail : customerOrderDetailList) {

@@ -5,7 +5,10 @@
 package com.redonz.pms.client.view.login;
 
 import com.redonz.pms.client.connector.ServerConnector;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.model.User;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -218,6 +221,10 @@ public class LogIn extends javax.swing.JDialog {
             }
         } catch (RemoteException | SQLException | ClassNotFoundException | NotBoundException | MalformedURLException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_logInButtonActionPerformed
 

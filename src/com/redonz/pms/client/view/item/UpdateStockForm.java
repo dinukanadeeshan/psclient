@@ -10,6 +10,7 @@ import com.redonz.pms.client.observer.BatchItemObserver;
 import com.redonz.pms.client.observer.ItemObserver;
 import com.redonz.pms.client.others.IDGen;
 import com.redonz.pms.client.others.Validation;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.common.controller.ItemController;
 import com.redonz.pms.common.model.BatchItem;
 import com.redonz.pms.common.model.Item;
@@ -19,6 +20,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
@@ -48,7 +51,7 @@ public class UpdateStockForm extends javax.swing.JDialog {
     private BatchItemObserver batchItemObserver;
     private ArrayList<Integer> integers = new ArrayList<>();
     private boolean itemNotFound = false;
-    private  ItemObserver itemObserver;
+    private ItemObserver itemObserver;
 
     /**
      * Creates new form UpdateStockForm
@@ -528,6 +531,10 @@ public class UpdateStockForm extends javax.swing.JDialog {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UpdateStockForm.class
                     .getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_barcodeTextFieldActionPerformed
 
@@ -578,6 +585,10 @@ public class UpdateStockForm extends javax.swing.JDialog {
             integers.clear();
         } catch (SQLException | ClassNotFoundException | RemoteException | NotBoundException | MalformedURLException ex) {
             Logger.getLogger(UpdateStockForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -742,7 +753,7 @@ public class UpdateStockForm extends javax.swing.JDialog {
         barcodeTextField.requestFocus();
     }
 
-    public void setItemDetaills(String barcode) throws NotBoundException, HeadlessException, ClassNotFoundException, MalformedURLException, RemoteException, SQLException {
+    public void setItemDetaills(String barcode) throws NotBoundException, HeadlessException, ClassNotFoundException, MalformedURLException, RemoteException, SQLException, FileNotFoundException, IOException {
         ItemController itemController = ServerConnector.getServerConnector().getItemController();
         ItemDetail itemDetail = itemController.getAbstractItemDetail(barcode);
         if (itemDetail != null) {
@@ -879,6 +890,10 @@ public class UpdateStockForm extends javax.swing.JDialog {
                         setItemDetaills(text);
                     } catch (NotBoundException | HeadlessException | ClassNotFoundException | MalformedURLException | RemoteException | SQLException ex) {
                         Logger.getLogger(UpdateStockForm.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }

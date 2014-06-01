@@ -9,6 +9,8 @@ import com.redonz.pms.client.others.IDGen;
 import com.redonz.pms.client.view.item.AddItemForm;
 import com.redonz.pms.common.model.Customer;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -35,6 +37,10 @@ public class AddCustomerForm extends javax.swing.JDialog {
             String lastID = ServerConnector.getServerConnector().getCustomerController().getLastCustomerID();
             customerIdTextField.setText(IDGen.getNextId(lastID));
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -240,6 +246,10 @@ public class AddCustomerForm extends javax.swing.JDialog {
             }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -331,6 +341,10 @@ public class AddCustomerForm extends javax.swing.JDialog {
             String lastID = ServerConnector.getServerConnector().getCustomerController().getLastCustomerID();
             customerIdTextField.setText(IDGen.getNextId(lastID));
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         nameTextField.setText("");

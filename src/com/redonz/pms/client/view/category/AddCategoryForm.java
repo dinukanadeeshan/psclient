@@ -6,9 +6,12 @@ package com.redonz.pms.client.view.category;
 
 import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.others.IDGen;
+import com.redonz.pms.client.view.customer.AddCustomerForm;
 import com.redonz.pms.client.view.item.AddItemForm;
 import com.redonz.pms.common.model.Category;
 import java.awt.Color;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -22,6 +25,7 @@ import javax.swing.JDialog;
  * @author DI_SH
  */
 public class AddCategoryForm extends javax.swing.JDialog {
+
     private JDialog dialog;
 
     /**
@@ -29,7 +33,7 @@ public class AddCategoryForm extends javax.swing.JDialog {
      */
     public AddCategoryForm(java.awt.Dialog parent, boolean modal) {
         super(parent, modal);
-        dialog =  (JDialog) parent;
+        dialog = (JDialog) parent;
         initComponents();
         setLocationRelativeTo(null);
         try {
@@ -37,6 +41,11 @@ public class AddCategoryForm extends javax.swing.JDialog {
             String nextId = IDGen.getNextId(lastCategoryId);
             categoryIdTextField.setText(nextId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -185,20 +194,24 @@ public class AddCategoryForm extends javax.swing.JDialog {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         String categoryId = categoryIdTextField.getText();
-       
+
         String desc = descriptionTextField.getText();
         Category category = new Category(categoryId, desc);
         try {
             boolean res = ServerConnector.getServerConnector().getCategoryController().addCategory(category);
-        
-            
+
+
             if (res && dialog instanceof AddItemForm) {
-                ((AddItemForm)dialog).setCategory(categoryId);
-                
+                ((AddItemForm) dialog).setCategory(categoryId);
+
                 dispose();
             }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(AddCustomerForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -265,12 +278,17 @@ public class AddCategoryForm extends javax.swing.JDialog {
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
-    private void reload(){
+
+    private void reload() {
         try {
             String lastCategoryId = ServerConnector.getServerConnector().getCategoryController().getLastCategoryId();
             String nextId = IDGen.getNextId(lastCategoryId);
             categoryIdTextField.setText(nextId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
         }
         descriptionTextField.setText("");
