@@ -4,7 +4,12 @@
  */
 package com.redonz.pms.client.view.main;
 
+import com.redonz.pms.client.view.item.AddItemForm;
+import com.redonz.pms.client.view.item.SearchItemForm;
+import com.redonz.pms.client.view.item.UpdateStockForm;
 import com.redonz.pms.client.view.login.LogIn;
+import com.redonz.pms.client.view.order.MakeInvoiceForm;
+import com.redonz.pms.client.view.payment.SettlePaymentForm;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
@@ -36,15 +41,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         imgLable = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        makeInvoiceButton = new javax.swing.JButton();
+        updateStockButton = new javax.swing.JButton();
+        settlePaymentButton = new javax.swing.JButton();
+        manageOrderButton = new javax.swing.JButton();
+        newItemButton = new javax.swing.JButton();
+        searchItemButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        logOutLabel = new javax.swing.JLabel();
+        exitLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pharmacy Mangement System");
@@ -53,57 +58,87 @@ public class MainFrame extends javax.swing.JFrame {
 
         imgLable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/redonz/pms/client/img/A.png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Make Invoice");
-        jButton1.setBorderPainted(false);
+        makeInvoiceButton.setBackground(new java.awt.Color(0, 153, 0));
+        makeInvoiceButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        makeInvoiceButton.setForeground(new java.awt.Color(255, 255, 255));
+        makeInvoiceButton.setText("Make Invoice");
+        makeInvoiceButton.setBorderPainted(false);
+        makeInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeInvoiceButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(0, 153, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Update Stock");
-        jButton2.setBorderPainted(false);
+        updateStockButton.setBackground(new java.awt.Color(0, 153, 0));
+        updateStockButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        updateStockButton.setForeground(new java.awt.Color(255, 255, 255));
+        updateStockButton.setText("Update Stock");
+        updateStockButton.setBorderPainted(false);
+        updateStockButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStockButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(0, 153, 0));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Settle Payment");
-        jButton3.setBorderPainted(false);
+        settlePaymentButton.setBackground(new java.awt.Color(0, 153, 0));
+        settlePaymentButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        settlePaymentButton.setForeground(new java.awt.Color(255, 255, 255));
+        settlePaymentButton.setText("Settle Payment");
+        settlePaymentButton.setBorderPainted(false);
+        settlePaymentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settlePaymentButtonActionPerformed(evt);
+            }
+        });
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 0));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Manage Orders");
-        jButton4.setBorderPainted(false);
+        manageOrderButton.setBackground(new java.awt.Color(0, 153, 0));
+        manageOrderButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        manageOrderButton.setForeground(new java.awt.Color(255, 255, 255));
+        manageOrderButton.setText("Manage Orders");
+        manageOrderButton.setBorderPainted(false);
+        manageOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageOrderButtonActionPerformed(evt);
+            }
+        });
 
-        jButton5.setBackground(new java.awt.Color(0, 153, 0));
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("New Item");
-        jButton5.setBorderPainted(false);
+        newItemButton.setBackground(new java.awt.Color(0, 153, 0));
+        newItemButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        newItemButton.setForeground(new java.awt.Color(255, 255, 255));
+        newItemButton.setText("New Item");
+        newItemButton.setBorderPainted(false);
+        newItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newItemButtonActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(0, 153, 0));
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Search Items");
-        jButton6.setBorderPainted(false);
+        searchItemButton.setBackground(new java.awt.Color(0, 153, 0));
+        searchItemButton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        searchItemButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchItemButton.setText("Search Items");
+        searchItemButton.setBorderPainted(false);
+        searchItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchItemButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(0, 102, 0));
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setOpaque(true);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/redonz/pms/client/img/gnome-session-logout.png"))); // NOI18N
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        logOutLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/redonz/pms/client/img/gnome-session-logout.png"))); // NOI18N
+        logOutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
+                logOutLabelMouseClicked(evt);
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/redonz/pms/client/img/Actions-session-exit-icon.png"))); // NOI18N
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        exitLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/redonz/pms/client/img/Actions-session-exit-icon.png"))); // NOI18N
+        exitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                exitLabelMouseClicked(evt);
             }
         });
 
@@ -120,17 +155,17 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 1340, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(11, 11, 11)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(makeInvoiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(updateStockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(settlePaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(manageOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(newItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
@@ -138,8 +173,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(exitLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(logOutLabel, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -149,22 +184,22 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(imgLable, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(makeInvoiceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateStockButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(settlePaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchItemButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exitLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel3, jLabel4});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {exitLabel, logOutLabel});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,19 +218,44 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
         int res = JOptionPane.showConfirmDialog(this, "Are you sure want to exit?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (res == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_exitLabelMouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+    private void logOutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logOutLabelMouseClicked
         dispose();
         new LogIn(null, true).setVisible(true);
         
         
-    }//GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_logOutLabelMouseClicked
+
+    private void makeInvoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeInvoiceButtonActionPerformed
+        new MakeInvoiceForm(this, true).setVisible(true);
+    }//GEN-LAST:event_makeInvoiceButtonActionPerformed
+
+    private void updateStockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStockButtonActionPerformed
+        new UpdateStockForm(this, true).setVisible(true);
+    }//GEN-LAST:event_updateStockButtonActionPerformed
+
+    private void settlePaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settlePaymentButtonActionPerformed
+        new SettlePaymentForm(this, true).setVisible(true);
+    }//GEN-LAST:event_settlePaymentButtonActionPerformed
+
+    private void manageOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrderButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_manageOrderButtonActionPerformed
+
+    private void newItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newItemButtonActionPerformed
+        new AddItemForm(this, true).setVisible(true);
+        
+    }//GEN-LAST:event_newItemButtonActionPerformed
+
+    private void searchItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemButtonActionPerformed
+        new SearchItemForm(this, true).setVisible(true);
+    }//GEN-LAST:event_searchItemButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,16 +293,16 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel exitLabel;
     private javax.swing.JLabel imgLable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel logOutLabel;
+    private javax.swing.JButton makeInvoiceButton;
+    private javax.swing.JButton manageOrderButton;
+    private javax.swing.JButton newItemButton;
+    private javax.swing.JButton searchItemButton;
+    private javax.swing.JButton settlePaymentButton;
+    private javax.swing.JButton updateStockButton;
     // End of variables declaration//GEN-END:variables
 }

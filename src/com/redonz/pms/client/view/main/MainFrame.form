@@ -58,17 +58,17 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="makeInvoiceButton" min="-2" pref="218" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton2" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="updateStockButton" min="-2" pref="218" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton3" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="settlePaymentButton" min="-2" pref="218" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton4" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="manageOrderButton" min="-2" pref="218" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="newItemButton" min="-2" pref="218" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton6" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="searchItemButton" min="-2" pref="218" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -80,8 +80,8 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="exitLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="logOutLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -96,19 +96,19 @@
                   <Component id="imgLable" min="-2" pref="97" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton1" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="makeInvoiceButton" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="updateStockButton" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="settlePaymentButton" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="manageOrderButton" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="newItemButton" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
+                      <Component id="searchItemButton" alignment="3" min="-2" pref="65" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="9" max="-2" attributes="0"/>
                   <EmptySpace pref="404" max="32767" attributes="0"/>
-                  <Component id="jLabel3" linkSize="1" min="-2" pref="116" max="-2" attributes="0"/>
+                  <Component id="logOutLabel" linkSize="1" min="-2" pref="116" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="jLabel4" linkSize="1" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="exitLabel" linkSize="1" min="-2" pref="68" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -122,7 +122,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="makeInvoiceButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -136,8 +136,11 @@
             <Property name="text" type="java.lang.String" value="Make Invoice"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="makeInvoiceButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="updateStockButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -151,8 +154,11 @@
             <Property name="text" type="java.lang.String" value="Update Stock"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateStockButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="settlePaymentButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -166,8 +172,11 @@
             <Property name="text" type="java.lang.String" value="Settle Payment"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settlePaymentButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="manageOrderButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -181,8 +190,11 @@
             <Property name="text" type="java.lang.String" value="Manage Orders"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageOrderButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="newItemButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -196,8 +208,11 @@
             <Property name="text" type="java.lang.String" value="New Item"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newItemButtonActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="searchItemButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="99" red="0" type="rgb"/>
@@ -211,6 +226,9 @@
             <Property name="text" type="java.lang.String" value="Search Items"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchItemButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -223,24 +241,24 @@
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="logOutLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/redonz/pms/client/img/gnome-session-logout.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="logOutLabelMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="exitLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/redonz/pms/client/img/Actions-session-exit-icon.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="exitLabelMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
