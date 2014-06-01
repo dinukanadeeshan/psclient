@@ -73,6 +73,9 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
             dateLabel.setText(ServerConnector.getServerConnector().getDateController().getCurrentDate());
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(MakeInvoiceForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getMessage().contains("Connection refused to host")) {
+                JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         dtm = (DefaultTableModel) itemTable.getModel();
         itemTable.getColumnModel().getColumn(0).setPreferredWidth(0);

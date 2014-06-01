@@ -66,6 +66,9 @@ public class SettlePaymentForm extends javax.swing.JDialog {
             loadCustomersToComboBox();
         } catch (NotBoundException | RemoteException | SQLException | MalformedURLException | ClassNotFoundException ex) {
             Logger.getLogger(SettlePaymentForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getMessage().contains("Connection refused to host")) {
+                JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         try {
             paymentObserver = new PaymentObserver(this);

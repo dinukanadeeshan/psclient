@@ -56,6 +56,7 @@ public class UpdateStockForm extends javax.swing.JDialog {
     public UpdateStockForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         dtm = (DefaultTableModel) itemTable.getModel();
         itemTable.setDefaultRenderer(Object.class, new ItemTableCellRenderer());
         itemTable.setRowHeight(20);
@@ -69,6 +70,9 @@ public class UpdateStockForm extends javax.swing.JDialog {
             System.out.println(itemObserver.isChanged());
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {
             Logger.getLogger(UpdateStockForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getMessage().contains("Connection refused to host")) {
+                JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         itemTable.setDefaultRenderer(Object.class, new MyRendererClass());
     }

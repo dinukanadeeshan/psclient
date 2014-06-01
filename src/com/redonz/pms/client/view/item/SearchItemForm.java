@@ -63,6 +63,9 @@ public class SearchItemForm extends javax.swing.JDialog {
             fillCategoryComboBox();
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SearchItemForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getMessage().contains("Connection refused to host")) {
+                JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         toExpDatePicker.setFormats(dateFormat);

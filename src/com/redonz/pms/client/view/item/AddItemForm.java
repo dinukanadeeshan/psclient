@@ -36,6 +36,7 @@ public class AddItemForm extends javax.swing.JDialog {
     public AddItemForm(java.awt.Dialog parent, boolean modal, String barcode) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         dialog = (JDialog) parent;
         barcodeTextField.setText(barcode);
         categoryComboBox.requestFocus();
@@ -44,6 +45,9 @@ public class AddItemForm extends javax.swing.JDialog {
             fillCategoryComboBox();
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getMessage().contains("Connection refused to host")) {
+                JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }
@@ -54,10 +58,14 @@ public class AddItemForm extends javax.swing.JDialog {
     public AddItemForm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         try {
             fillCategoryComboBox();
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getMessage().contains("Connection refused to host")) {
+                JOptionPane.showMessageDialog(this, "Connection has corrupt or no server started....", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
