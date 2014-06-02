@@ -8,6 +8,8 @@ import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.common.model.BatchItem;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -272,7 +274,9 @@ public class ChooseBatchItem extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "This item is already Reserved....", "", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (RemoteException | NotBoundException | SQLException | MalformedURLException | ClassNotFoundException ex) {
+        } catch (RemoteException | NotBoundException | SQLException | MalformedURLException | ClassNotFoundException | FileNotFoundException  ex) {
+            Logger.getLogger(ChooseBatchItem.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(ChooseBatchItem.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
