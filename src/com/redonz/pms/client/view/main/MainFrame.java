@@ -10,6 +10,7 @@ import com.redonz.pms.client.view.item.UpdateStockForm;
 import com.redonz.pms.client.view.login.LogIn;
 import com.redonz.pms.client.view.order.MakeInvoiceForm;
 import com.redonz.pms.client.view.payment.SettlePaymentForm;
+import com.redonz.pms.common.model.User;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
@@ -21,10 +22,12 @@ import javax.swing.JOptionPane;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private User user;
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    public MainFrame(User user) {
+        this.user = user;
         initComponents();
         setExtendedState(MAXIMIZED_BOTH); 
         setIconImage(Toolkit.getDefaultToolkit().getImage("./src/com/redonz/pms/client/img/main.gif"));
@@ -288,7 +291,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame(new User("a", null, 1)).setVisible(true);
             }
         });
     }

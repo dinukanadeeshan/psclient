@@ -6,6 +6,7 @@ package com.redonz.pms.client.view.login;
 
 import com.redonz.pms.client.connector.ServerConnector;
 import com.redonz.pms.client.view.customer.AddCustomerForm;
+import com.redonz.pms.client.view.main.MainFrame;
 import com.redonz.pms.common.model.User;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -216,7 +217,7 @@ public class LogIn extends javax.swing.JDialog {
             if (user == null) {
                 JOptionPane.showMessageDialog(this, "Invalid UserName/Password", "", JOptionPane.ERROR_MESSAGE);
             } else {
-                
+                new MainFrame(user).setVisible(true);
                 dispose();
             }
         } catch (RemoteException | SQLException | ClassNotFoundException | NotBoundException | MalformedURLException ex) {
