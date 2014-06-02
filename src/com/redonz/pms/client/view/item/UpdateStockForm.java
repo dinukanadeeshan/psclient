@@ -52,6 +52,7 @@ public class UpdateStockForm extends javax.swing.JDialog {
     private ArrayList<Integer> integers = new ArrayList<>();
     private boolean itemNotFound = false;
     private ItemObserver itemObserver;
+    private String itemCode;
 
     /**
      * Creates new form UpdateStockForm
@@ -556,12 +557,10 @@ public class UpdateStockForm extends javax.swing.JDialog {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         try {
             ArrayList<BatchItem> batchItemList = new ArrayList<>();
-            String itemCode = ServerConnector.getServerConnector().getBatchItemController().getLastBatchItemCode();
-            if (itemCode == null) {
-                itemCode = "BI0000";
-            }
+            
             for (int i = 0; i < itemTable.getRowCount(); i++) {
-                itemCode = IDGen.getNextId(itemCode);
+//                itemCode = IDGen.getNextId(itemCode);
+                itemCode = ServerConnector.getServerConnector().getBatchItemController().getNextBatchItemCode();
                 String barcode = (String) itemTable.getValueAt(i, 0);
                 String batchNo = (String) itemTable.getValueAt(i, 1);
                 double unitPrice = Double.parseDouble((String) itemTable.getValueAt(i, 2));

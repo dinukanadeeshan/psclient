@@ -59,6 +59,7 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
     private String barcode;
     private String itemCode;
     private BatchItemObserver batchItemObserver;
+    private String orderId;
 
     /**
      * Creates new form MakeInvoiceForm
@@ -898,7 +899,8 @@ public class MakeInvoiceForm extends javax.swing.JDialog {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         try {
-            String orderId = IDGen.getNextId(ServerConnector.getServerConnector().getCustomerOrderController().getLastOrderId());
+//            String orderId = IDGen.getNextId(ServerConnector.getServerConnector().getCustomerOrderController().getLastOrderId());
+            orderId = ServerConnector.getServerConnector().getCustomerOrderController().getNextOrderId();
             String custId = ((Customer) customerComboBox.getSelectedItem()).getCustId();
             String date = dateLabel.getText();
             ArrayList<CustomerOrderDetail> customerOrderDetails = new ArrayList<>();

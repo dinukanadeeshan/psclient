@@ -47,6 +47,7 @@ public class CustomerPaymentForm extends javax.swing.JDialog {
     private final int i;
     private final CustomerOrder customerOrder;
     private java.awt.Dialog parent;
+    private String paymentId;
 
     /**
      * Creates new form CustomerPaymentForm
@@ -397,8 +398,9 @@ public class CustomerPaymentForm extends javax.swing.JDialog {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         try {
-            String lastPaymentId = ServerConnector.getServerConnector().getPaymentController().getLastPaymentId();
-            String paymentId = IDGen.getNextId(lastPaymentId != null ? lastPaymentId : "P0000");
+//            String lastPaymentId = ServerConnector.getServerConnector().getPaymentController().getLastPaymentId();
+//            String paymentId = IDGen.getNextId(lastPaymentId != null ? lastPaymentId : "P0000");
+            paymentId = ServerConnector.getServerConnector().getPaymentController().getNextPaymentId();
 
             Payment payment = new Payment(paymentId, orderId, ServerConnector.getServerConnector().getDateController().getCurrentDate(), Double.parseDouble(paymentRecieveTextField.getText()), 0);
 //            boolean res = ServerConnector.getServerConnector().getPaymentController().savePayment(payment);
@@ -409,6 +411,8 @@ public class CustomerPaymentForm extends javax.swing.JDialog {
                 if (parent instanceof MakeInvoiceForm) {
                     ((MakeInvoiceForm) parent).refresh();
                 }
+            } else {
+                ServerConnector.getServerConnector().getPaymentController().releasePaymentId(paymentId);
             }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CustomerPaymentForm.class.getName()).log(Level.SEVERE, null, ex);

@@ -27,6 +27,7 @@ import javax.swing.JDialog;
 public class AddCategoryForm extends javax.swing.JDialog {
 
     private JDialog dialog;
+    private String nextId;
 
     /**
      * Creates new form AddCategoryForm
@@ -37,8 +38,8 @@ public class AddCategoryForm extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         try {
-            String lastCategoryId = ServerConnector.getServerConnector().getCategoryController().getLastCategoryId();
-            String nextId = IDGen.getNextId(lastCategoryId);
+
+            nextId = ServerConnector.getServerConnector().getCategoryController().getNextCategoryId();
             categoryIdTextField.setText(nextId);
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,6 +71,11 @@ public class AddCategoryForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         mainPanel.setBackground(new java.awt.Color(247, 247, 247));
 
@@ -206,6 +212,13 @@ public class AddCategoryForm extends javax.swing.JDialog {
 
                 dispose();
             }
+            if (!res) {
+                try {
+                    ServerConnector.getServerConnector().getCategoryController().releaseCategoryId(nextId);
+                } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+                    Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } catch (NotBoundException | MalformedURLException | RemoteException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AddItemForm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -226,6 +239,16 @@ public class AddCategoryForm extends javax.swing.JDialog {
     private void descriptionTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_descriptionTextFieldKeyReleased
         saveButton.setEnabled(!descriptionTextField.getText().isEmpty());
     }//GEN-LAST:event_descriptionTextFieldKeyReleased
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if (nextId != null) {
+            try {
+                ServerConnector.getServerConnector().getCategoryController().releaseCategoryId(nextId);
+            } catch (NotBoundException | MalformedURLException | RemoteException ex) {
+                Logger.getLogger(AddCategoryForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
